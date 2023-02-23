@@ -102,3 +102,76 @@ command: npm install mongoose cors express nodemon
 
 
 6.) Creation of server file tilted "index.js" inside of server.
+---------------------------------------------------------------------------------------------------------------------------------------
+content for index.js:
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+
+mongoose.set('strictQuery', true);
+// set up middle ware
+app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+
+// establish communication to MongoDB atlas (database)
+
+mongoose.connect("mongodb+srv://humblebeastchris99:Student1234!@cluster0.jzi7y1y.mongodb.net/ExoticDealership?retryWrites=true&w=majority").then( () =>
+console.log("Connected To Database")).then( () =>{
+app.listen(3001)
+}).catch((err) => console.log(err));
+
+
+
+*end of Code.
+
+
+8.) Create Folder to Hold Mongoose Model(structuring of information)
+
+-Create folder titled "Model" in server folder, and then create file 
+titled as the same name as your collection. (in this case, VehicleInformation.js)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Cotent for VehicleInformation.JS :
+
+const mongoose = required ('mongoose');
+// create schema to hold structuring of content
+
+const Schema = mongoose.Schema;
+const carSchema = new Schema({ 
+make_model:{
+    type: String,
+    required : true,
+},
+
+
+price:{
+    type:String,
+    required: true,
+},
+year:{
+
+    type:Number,
+    required: true,
+
+},
+engine:{
+
+    type: String,
+    reqired: true
+},
+
+
+
+});
+
+
+//export schema to be used in other files
+module.exports = mongoose.model("VehicleInformation",carSchema);
+
+
+
+
+
+
